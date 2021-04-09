@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  app:
+    image: node:14.16.1-alpine3.13
+    command: sh -c "ls && yarn && yarn build && cp -f src/settings.yaml dist/settings.yaml && yarn start"
+    ports:
+      - 3002:3002
+    working_dir: /var/www/service
+    volumes:
+      - .:/var/www/service
+    environment:
+      MYSQL_HOST: "mysql"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "password"
+      MYSQL_DB: "crypto_exchanges"
+
+  mysql:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_DATABASE: "crypto_exchanges"
+      MYSQL_USER: "ivan"
+      MYSQL_PASSWORD: "password"

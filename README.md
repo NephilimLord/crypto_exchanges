@@ -32,20 +32,21 @@
 $ npm install
 ```
 
-## Config
-# Use config/default.js file to set up port, apitoken and mysql creds to connect
+## Description
+Use config/default.js file to set up port, apitoken, port and mysql creds to connect.
+
 
 ## Running the app
 
 ```bash
-# development
-$ npm run start
+$ yarn build
+$ yarn start
+```
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```dockerfile
+docker-compose up -d
+docker-compose logs -f
+# wait until app is up. After open browser and enter localhost:<you port in config (3002 is default)>
 ```
 
 ## Test

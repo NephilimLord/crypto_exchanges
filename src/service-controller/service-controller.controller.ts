@@ -18,7 +18,14 @@ export class ServiceControllerController {
   async getCurrentExchanges(
     @Query() { fsyms, tsyms }: IGetCurrentExchanges,
   ): Promise<any> {
-    const apiExchangeResponse = await this.serviceControllerService.getCurrExchange(fsyms, tsyms);
-    return apiExchangeResponse.body;
+    let response = {};
+    try {
+      const apiExchangeResponse = await this.serviceControllerService.getCurrExchange(fsyms, tsyms);
+      response = apiExchangeResponse.body;
+    } catch (e) {
+      console.log(e);
+    }
+
+    return response;
   }
 }

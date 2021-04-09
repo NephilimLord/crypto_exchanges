@@ -7,11 +7,11 @@ config.port = 3002;
 config.apiToken = ''; // enter your token
 config.cronTime = '* * * * *';
 config.mysql = {
-  host: 'localhost',
-  port: 3306,
-  username: 'ivan',
-  password: '',
-  database: 'crypto_exchanges',
+  host: process.env.MYSQL_HOST || 'localhost',
+  port: process.env.MYSQL_PORT || 3306,
+  username: process.env.MYSQL_USER || 'ivan',
+  password: process.env.MYSQL_PASSWORD || '',
+  database: process.env.MYSQL_DB || 'crypto_exchanges',
 };
 
 module.exports = config;

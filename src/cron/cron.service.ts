@@ -26,6 +26,7 @@ export class GetCurrenciesExchanges {
 
   @Cron(config.get('cronTime'))
   async handleCron() {
+    console.log('Cron init:', new Date());
     const fiatCurrenciesDBRes = await this.getFiatCurrencies();
     const cryptoCurrenciesDBRes = await this.getCryptoCurrencies();
     const fiatCurrencies = fiatCurrenciesDBRes.map(el => el.currency_code);
@@ -33,8 +34,14 @@ export class GetCurrenciesExchanges {
     const fiatCurString = fiatCurrencies.join(',');
     const cryptoCurString = cryptoCurrencies.join(',');
 
-    const apiExchangeResponse = await getThirdPartyExchange(cryptoCurString, fiatCurString);
-    const body = apiExchangeResponse.body;
+    let body;
+    try {
+      const apiExchangeResponse = await getThirdPartyExchange(cryptoCurString, fiatCurString);
+      body = apiExchangeResponse.body;
+    } catch (e) {
+      console.log(e);
+    }
+
     if (!body) {
       return;
     }

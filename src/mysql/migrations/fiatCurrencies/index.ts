@@ -1,7 +1,9 @@
 import { MigrationInterface, QueryRunner, getManager } from 'typeorm';
 
 import { FiatCurrencies } from '../../schemas/fiatCurrencies';
-import { fiatCurrencies } from '../../../utils/init-currencies';
+import { getCurrenciesArray } from '../../../utils/get-currencies';
+
+const fiatCurrencies = getCurrenciesArray('fiat');
 
 export class FiatCurrenciesMigration implements MigrationInterface {
   readonly name = `FiatCurrenciesMigration${new Date().valueOf()}`;

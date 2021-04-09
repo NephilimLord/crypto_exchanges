@@ -1,7 +1,9 @@
 import { getManager, MigrationInterface, QueryRunner } from 'typeorm';
 
-import { cryptoCurrencies } from '../../../utils/init-currencies';
 import { CryptoCurrencies } from '../../schemas/cryptoCurrencies';
+import { getCurrenciesArray } from '../../../utils/get-currencies';
+
+const cryptoCurrencies = getCurrenciesArray('crypto');
 
 export class CryptoCurrenciesMigration implements MigrationInterface {
   readonly name = `CryptoCurrenciesMigration${new Date().valueOf()}`;

@@ -1,7 +1,10 @@
 import { IsString } from 'class-validator';
 import { Transform } from 'class-transformer';
 
-import { cryptoCurrencies, fiatCurrencies } from '../../utils/init-currencies';
+import { getCurrenciesArray } from '../../utils/get-currencies';
+
+const cryptoCurrencies = getCurrenciesArray('crypto');
+const fiatCurrencies = getCurrenciesArray('fiat');
 
 const parseCryptoQuery = (v: string) =>
   v.split(',').map(cur => cryptoCurrencies.includes(cur) ? cur : null).filter(el => el).join(',');
